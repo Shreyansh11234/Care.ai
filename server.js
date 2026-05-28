@@ -180,8 +180,4 @@ app.post('/api/analyze', uploadFields, async (req, res) => {
 // ======================
 // Start Server
 // ======================
-
-app.listen(port, () => {
-    console.log(`Care.ai running on port ${port}`);
-});
-````
+module.exports = app;
