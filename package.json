@@ -16,5 +16,8 @@
     "express": "^5.2.1",
     "multer": "^2.1.1"
   },
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "@vercel/node": "^5.8.6"
+  }
 }
