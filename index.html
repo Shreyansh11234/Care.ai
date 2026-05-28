@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Care.ai | AI-Powered Symptom & Diagnosis Portal</title>
+    <meta name="description" content="Analyze your symptoms, upload photos of visible conditions, and share medical reports for an AI-powered preliminary health assessment.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-effects">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <header class="header">
+        <a href="/" class="logo">
+            <i class="fa-solid fa-heart-pulse"></i>
+            <span>Care.ai</span>
+        </a>
+        <nav>
+            <a href="index.html" class="active">Diagnose</a>
+            <a href="about.html">About</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1>Understand Your Symptoms with AI</h1>
+            <p>Describe your symptoms, upload photos of visible conditions, or share medical reports for an instant AI-powered preliminary analysis.</p>
+        </section>
+
+        <section class="analysis-section">
+            <div class="card form-card">
+                <h2>Start Your Analysis</h2>
+                <form id="diagnosisForm">
+                    <!-- Symptom Text -->
+                    <div class="input-group">
+                        <label for="symptoms"><i class="fa-solid fa-comment-medical label-icon"></i> Describe your symptoms in detail</label>
+                        <textarea id="symptoms" placeholder="e.g., I have a persistent headache, mild fever, a red rash on my arm, and my blood report shows high WBC count..." rows="4"></textarea>
+                    </div>
+
+                    <!-- Photo Upload -->
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-camera-retro label-icon"></i> Upload photos of affected area <span class="optional-tag">Optional</span></label>
+                        <div class="file-upload-wrapper" id="imageDropZone">
+                            <input type="file" id="imageUpload" accept="image/jpeg, image/png, image/webp" class="file-input" multiple>
+                            <div class="upload-content" id="imageUploadContent">
+                                <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                                <p>Drag & drop images here or <span>browse</span></p>
+                                <small>Supports JPG, PNG, WEBP — up to 5 photos</small>
+                            </div>
+                            <div class="preview-grid" id="imagePreviewGrid"></div>
+                        </div>
+                    </div>
+
+                    <!-- Report / PDF Upload -->
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-file-medical label-icon"></i> Upload medical reports <span class="optional-tag">Optional</span></label>
+                        <div class="file-upload-wrapper report-upload" id="reportDropZone">
+                            <input type="file" id="reportUpload" accept="application/pdf,image/jpeg,image/png" class="file-input" multiple>
+                            <div class="upload-content" id="reportUploadContent">
+                                <i class="fa-solid fa-file-arrow-up upload-icon"></i>
+                                <p>Drag & drop reports here or <span>browse</span></p>
+                                <small>Supports PDF, JPG, PNG — blood tests, X-rays, lab results</small>
+                            </div>
+                            <div class="report-list" id="reportList"></div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="submitBtn">
+                        <span class="btn-text">Analyze with AI</span>
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <div class="spinner" style="display: none;"></div>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Results Card -->
+            <div class="card results-card" id="resultsCard" style="display: none;">
+                <h2><i class="fa-solid fa-clipboard-check" style="color: var(--primary-accent);"></i> Analysis Results</h2>
+                
+                <div class="consultation-banner" id="consultationBanner">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div class="banner-text">
+                        <h3 id="recommendationTitle">Consult a Doctor</h3>
+                        <p id="recommendationText">Based on your symptoms, we highly recommend consulting a healthcare professional.</p>
+                    </div>
+                </div>
+
+                <div class="conditions-list">
+                    <h3>Potential Conditions</h3>
+                    <div id="conditionsContainer"></div>
+                </div>
+
+                <div class="disclaimer-alert">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <p><strong>Medical Disclaimer:</strong> This is an AI-powered informational tool and does not provide medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
+                </div>
+                
+                <button class="btn-secondary" id="resetBtn">
+                    <i class="fa-solid fa-arrow-rotate-left"></i> Start New Analysis
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Care.ai Portal &mdash; AI-Powered Health Insights. For informational purposes only.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
