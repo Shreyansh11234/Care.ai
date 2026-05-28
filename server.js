@@ -1,4 +1,3 @@
-````js
 require('dotenv').config();
 
 const express = require('express');
@@ -48,11 +47,8 @@ const uploadFields = upload.fields([
     { name: 'reports', maxCount: 3 },
 ]);
 
-// ======================
-// Gemini Setup
-// ======================
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const apiKey = process.env.GEMINI_API_KEY || '';
+const genAI = new GoogleGenerativeAI(apiKey || 'PLACEHOLDER_KEY');
 
 const MODEL_NAME = 'gemini-2.5-flash';
 
@@ -98,6 +94,12 @@ OUTPUT FORMAT:
 
 app.post('/api/analyze', uploadFields, async (req, res) => {
     try {
+        if (!process.env.GEMINI_API_KEY) {
+            return res.status(500).json({
+                error: 'GEMINI_API_KEY is not set. Please configure it in your Vercel project environment variables.'
+            });
+        }
+
         const symptomsText = req.body.symptoms || '';
         const imageFiles = req.files?.images || [];
         const reportFiles = req.files?.reports || [];
@@ -180,4 +182,10 @@ app.post('/api/analyze', uploadFields, async (req, res) => {
 // ======================
 // Start Server
 // ======================
+if (require.main === module) {
+    app.listen(port, () => {
+        console.log(`Server running on port ${port}`);
+    });
+}
+
 module.exports = app;
